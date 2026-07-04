@@ -1115,3 +1115,14 @@ html.js [data-aos].visible {
   background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
 }
 .nav-overlay.visible { display: block; }
+/* === Свайп-галерея в карточках экскурсий === */
+.exc-card-img-inner{position:absolute;inset:0;padding:0;overflow:hidden;display:block;}
+.exc-slider-track{display:flex;height:100%;transition:transform .35s ease;}
+.exc-slider-track img{min-width:100%;width:100%;height:100%;object-fit:cover;display:block;-webkit-user-drag:none;}
+.exc-slider-arrow{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:4;}
+.exc-card-img:hover .exc-slider-arrow{opacity:1;}
+.exc-slider-prev{left:10px;} .exc-slider-next{right:10px;}
+.exc-slider-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;gap:6px;justify-content:center;z-index:4;pointer-events:none;}
+.exc-slider-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);transition:background .2s;}
+.exc-slider-dots span.active{background:#fff;}
+@media(max-width:768px){.exc-slider-arrow{display:none;}}
