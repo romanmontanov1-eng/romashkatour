@@ -1,6 +1,6 @@
 /* =====================================================
    RomashkaTour — script.js
-   Language switching, animations, nav, FAQ, etc.
+   LanpreventDefaultuage switching, animations, nav, FAQ, etc.
    ===================================================== */
 
 'use strict';
@@ -323,4 +323,36 @@ function initGalleryLightbox() {
     const href = link.getAttribute('href');
     link.classList.toggle('active', href === page);
   });
+})();
+/* === Свайп-галерея в карточках экскурсий === */
+(function(){
+  function init(){
+    document.querySelectorAll('.exc-card-img-inner').forEach(function(box){
+      if(box.dataset.slider) return;
+      var imgs=Array.prototype.slice.call(box.querySelectorAll('img'));
+      if(imgs.length===0) return;
+      box.dataset.slider='1';
+      var track=document.createElement('div');
+      track.className='exc-slider-track';
+      imgs.forEach(function(im){track.appendChild(im);});
+      box.appendChild(track);
+      var idx=0,n=imgs.length,dots=null;
+      function go(i){idx=(i+n)%n;track.style.transform='translateX('+(-idx*100)+'%)';
+        if(dots)dots.querySelectorAll('span').forEach(function(d,k){d.classList.toggle('active',k===idx);});}
+      if(n>1){
+        var prev=document.createElement('button');prev.type='button';prev.className='exc-slider-arrow exc-slider-prev';prev.innerHTML='&#10094;';
+        var next=document.createElement('button');next.type='button';next.className='exc-slider-arrow exc-slider-next';next.innerHTML='&#10095;';
+        prev.addEventListener('click',function(e){e.preventDefault();go(idx-1);});
+        next.addEventListener('click',function(e){e.preventDefault();go(idx+1);});
+        box.appendChild(prev);box.appendChild(next);
+        dots=document.createElement('div');dots.className='exc-slider-dots';
+        imgs.forEach(function(_,k){var sp=document.createElement('span');if(k===0)sp.classList.add('active');dots.appendChild(sp);});
+        box.appendChild(dots);
+        var x0=null;
+        track.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+        track.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){dx<0?go(idx+1):go(idx-1);}x0=null;});
+      }
+    });
+  }
+  if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
 })();
