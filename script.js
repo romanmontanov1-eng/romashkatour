@@ -1,6 +1,6 @@
 /* =====================================================
    RomashkaTour — script.js
-   LanpreventDefaultuage switching, animations, nav, FAQ, etc.
+   Language switching, animations, nav, FAQ, etc.
    ===================================================== */
 
 'use strict';
