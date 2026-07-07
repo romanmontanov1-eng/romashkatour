@@ -1,4 +1,4 @@
-RomashkaTour fixed project
+RomashkaTour 
 
 Структура должна быть именно такой:
 index.html
